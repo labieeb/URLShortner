@@ -8,6 +8,10 @@
         List<TinyURLBean> tinyUrlList = (List<TinyURLBean>) request.getAttribute("tinyURLList");
         Object tinyURLObj = request.getAttribute("tinyURL") == null ? "" : request.getAttribute("tinyURL");
         String tinyURL = (String)tinyURLObj;
+        String loggedUsername = (String)session.getAttribute("username");
+        if(null == session.getAttribute("username")){
+            response.setHeader("Location", "./login.jsp");
+        }
     %>
     
 <!DOCTYPE html>
@@ -39,23 +43,18 @@
    <h2>History of generated URLs</h2>
 
   <div class="table"> 
-    <table>
+    <table border="1">
       <tr>
         <th>Sl No</th>
-        <th><th>
-        <th>Name</th>
-        <th><th>
         <th>Long URL</th>
-        <th><th>
         <th>Tiny URL</th>
       </tr>
-      
-      <% for (TinyURLBean urlBean  : tinyUrlList){ %>
+        <% int slNo = 1;
+    	 for (TinyURLBean urlBean  : tinyUrlList){ %>
         <tr>
-          <td><%=urlBean.getId() %><td>
-          <td><%=urlBean.getUserId() %><td>
-          <td><%=urlBean.getUrl() %><td>
-          <td><%=urlBean.getTinyURL() %><td>
+          <td><%=slNo++ %></td>
+          <td><%=urlBean.getUrl() %></td>
+          <td><%=urlBean.getTinyURL() %></td>
         </tr>
         <% } %>
         

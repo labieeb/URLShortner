@@ -23,7 +23,7 @@
                 </div>
                 <input type="Submit" name="sign-In" value="sign-In">
         </form>
-
+		<a style="padding-left: 150px" href="./signup.jsp">Register</a>
     </div>
 </body>
 </html>
