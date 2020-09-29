@@ -46,6 +46,9 @@ public class LinkShorter extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		session = request.getSession();
 		model = new Model();
+		if(null == session.getAttribute("username")){
+			request.getRequestDispatcher("./login.jsp").forward(request, response);
+        }
 		
 		int userId = (int) session.getAttribute("userId");
 		

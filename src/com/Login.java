@@ -23,10 +23,7 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		System.out.println("Login controller.....");
-		
 		if(model.isValidUser(username, password)) {
-			System.out.println("Login success.....");
 			response.getWriter().append("Served at: ").append("Login Success ");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);

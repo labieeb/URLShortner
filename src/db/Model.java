@@ -15,7 +15,7 @@ public class Model {
 	
 	private String url="jdbc:mysql://localhost:3306/url_db";
 	private String username="root";
-	private String password="root";	
+	private String password="root";
 	
 	private Connection con = null;
 	
@@ -60,6 +60,16 @@ public class Model {
 		}
 	}
 	
+	public void addNewUser(String username, String password) {
+		String sql = "INSERT INTO `url_db`.`users` (`username`, `password`) VALUES ('"+username+"', '"+password+"')";
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public int getUserId(String username) {
 		int userId = 0;
 		String sql = "SELECT id FROM url_db.users where username='"+username+"'";
@@ -74,8 +84,9 @@ public class Model {
 		}
 		return userId;
 	}
+	
 	public String getUserName(int userId) {
-		String username = "";
+		String username = "No Name";
 		String sql = "SELECT username FROM url_db.users where id='"+userId+"'";
 		try {
 			Statement stmt = con.createStatement();
@@ -106,7 +117,7 @@ public class Model {
 
 	public static void main(String[] args) {
 		Model model = new Model();
-		System.out.println(model.getUserName(1));
+		System.out.println(model.getUserName(2));
 		//DELETE FROM `url_db`.`tiny_url` WHERE (`id` = '1');
 		List<TinyURLBean> urlList = model.getTinyUrls(1);
 //		for (TinyURLBean urlBean  : urlList){ 
